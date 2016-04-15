@@ -1,0 +1,57 @@
+diff --git a/build.py b/build.py
+index f707998..4a3fed7 100644
+--- a/build.py
++++ b/build.py
+@@ -130,6 +130,9 @@ def signdrivers(pack, signname, arch, additionalcert, signstr=None, crosssignstr
+         pack+"\\xenbus\\"+arch+"\\xenbus.sys",
+         pack+"\\xenbus\\"+arch+"\\xen.sys",
+         pack+"\\xenbus\\"+arch+"\\xenfilt.sys",
++        pack+"\\xenaud\\"+arch+"\\xenaud.sys",
++        pack+"\\xeninp\\"+arch+"\\xeninp.sys",
++        pack+"\\xenvesado\\"+arch+"\\xenveasado.sys",
+     ]
+     
+     noadditionalcertfiles = [
+@@ -165,7 +168,10 @@ def signcatfiles(pack, signname, arch, additionalcert, signstr = None):
+         pack+"\\xenvbd\\"+arch+"\\xenvbd.cat",
+         pack+"\\xennet\\"+arch+"\\xennet.cat",
+         pack+"\\xeniface\\"+arch+"\\xeniface.cat",
+-        pack+"\\xenbus\\"+arch+"\\xenbus.cat"
++        pack+"\\xenbus\\"+arch+"\\xenbus.cat",
++        pack+"\\xenaud\\"+arch+"\\xenaud.cat",
++        pack+"\\xeninp\\"+arch+"\\xeninp.cat",
++        pack+"\\xenvesado\\"+arch+"\\xenvesado.cat"
+     ]
+     
+     for afile in catfiles:
+@@ -369,6 +375,9 @@ def make_builds(pack, outbuilds):
+         shutil.copytree(pack+"\\xeniface", outbuilds+"\\xeniface")
+         shutil.copytree(pack+"\\xenguestagent", outbuilds+"\\xenguestagent")
+         shutil.copytree(pack+"\\xenvss", outbuilds+"\\xenvss")
++        shutil.copytree(pack+"\\xenaud", outbuilds+"\\xenaud")
++        shutil.copytree(pack+"\\xeninp", outbuilds+"\\xeninp")
++        shutil.copytree(pack+"\\xenvesado", outbuilds+"\\xenvesado")
+ 
+ def make_installer_builds(pack, outbuilds):
+         shutil.copytree(pack+"\\installwizard", outbuilds+"\\installwizard")
+@@ -400,7 +409,19 @@ driverlist= {
+         "xenvbd" :
+             {"guid" : 
+                 {   "x64" : "c813c967-2b82-4c7c-b784-49150df404f5",
+-                    "x86" : "bd94fe86-12e1-4e26-8117-da822892c689"}}
++                    "x86" : "bd94fe86-12e1-4e26-8117-da822892c689"}},
++        "xenaud" :
++            {"guid" : 
++                {   "x64" : "4B6A644C-1EE5-44BD-94B7-3BE127FF6654",
++                    "x86" : "A53BEECD-709D-49E4-A356-5342F360B022"}},
++        "xeninp" :
++            {"guid" : 
++                {   "x64" : "05404FD1-F95C-4037-ACCF-CAD6379F5687",
++                    "x86" : "8D5E1495-4145-4490-8051-5D7F5FF989E2"}},
++        "xenvesado" :
++            {"guid" : 
++                {   "x64" : "585778EE-6C75-4E70-858C-9FC254AB5130",
++                    "x86" : "B64C3769-38C7-47DD-AD0A-DAA01EA1B3BC"}}
+ }
+ 
+ def generate_driver_wxs(pack):

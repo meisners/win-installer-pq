@@ -1,0 +1,60 @@
+diff --git a/src/drivers/drivers.wxs b/src/drivers/drivers.wxs
+index 5a92655..4a5a9ea 100644
+--- a/src/drivers/drivers.wxs
++++ b/src/drivers/drivers.wxs
+@@ -51,6 +51,9 @@
+       <?define XenNetDriverGUID = '23ADA04F-E332-4919-8B33-1343F23726AF' ?>
+       <?define XenBusDriverGUID = 'E758A393-4C2A-4514-B752-C4C643473F35' ?>
+       <?define NetSettingsGUID = '9bcd2bf6-ad9b-4bf2-914e-e0d76d36ff62' ?>
++      <?define XenAudDriverGUID = 'E9663247-44BE-479B-BD17-6A7895C71EB4' ?>
++      <?define XenInpDriverGUID = '912D933F-C3D2-4345-80FF-A2684EF213E3' ?>
++      <?define XenVesaDriverGUID = '09C8059F-1722-4A25-87B8-2800D7EA62AA' ?>
+     <?else?>
+       <?define XenIfaceDriverGUID = '0015EBE7-54B7-4e3c-8A57-7A27C18C9B34' ?>
+       <?define XenVifDriverGUID = '059914AF-D2A5-476e-9015-69A9FD216865' ?>
+@@ -58,6 +61,9 @@
+       <?define XenNetDriverGUID = '08B4AC6E-1B49-4a72-A94E-1C89A7734191' ?>
+       <?define XenBusDriverGUID = '92EBFF13-EBAB-40c2-BC5E-40AE5BF2FC93' ?>
+       <?define NetSettingsGUID = '67e23d28-fc32-4638-9fd5-9786c566f777' ?>
++      <?define XenAudDriverGUID = 'B32C7CA8-BAA9-476C-B3DE-3DCEE9D9F907' ?>
++      <?define XenInpDriverGUID = '073A3046-6435-49DD-95F5-6532BEAFE27E' ?>
++      <?define XenVesadoDriverGUID = '0686040E-9C6C-40A6-A6F1-33D1D6749A0C' ?>
+ 
+     <?endif?>
+ 
+@@ -130,6 +136,35 @@
+ 
+         </Component>
+       </Directory> 
++
++      <!-- OpenXT Additional PV Drivers -->
++      <Directory Id='XenAudDir' Name='XenAud'>
++        <Component Id='XenAudDriver' Guid='$(var.XenAudDriverGUID)'>
++            <File Id='XenAudSys' Name='Xenaud.sys' DiskId='1' Source='xenaud\$(var.build)\xenaud.sys' KeyPath='yes' />
++            <File Id='XenAudCat' Name='Xenaud.cat' DiskId='1' Source='xenaud\$(var.build)\xenaud.cer' />
++            <File Id='XenAudInf' Name='Xenaud.inf' DiskId='1' Source='xenaud\$(var.build)\xenaud.inf' />
++            <difx:Driver PlugAndPlayPrompt='no' DeleteFiles='no' ForceInstall='no' Sequence='3' Legacy="yes"/>
++        </Component>
++      </Directory>
++
++      <Directory Id='XenInpDir' Name='XenInp'>
++        <Component Id='XenInpDriver' Guid='$(var.XenInpDriverGUID)'>
++            <File Id='XenInpSys' Name='xeninp.sys' DiskId='1' Source='xeninp\$(var.build)\xeninp.sys' KeyPath='yes' />
++            <File Id='XenInpCat' Name='xeninp.cat' DiskId='1' Source='xeninp\$(var.build)\xeninp.cer' />
++            <File Id='XenInpInf' Name='xeninp.inf' DiskId='1' Source='xeninp\$(var.build)\xeninp.inf' />
++            <difx:Driver PlugAndPlayPrompt='no' DeleteFiles='no' ForceInstall='no' Sequence='3' Legacy="yes"/>
++        </Component>
++      </Directory>
++
++      <Directory Id='XenVesaDir' Name='XenVesa'>
++        <Component Id='XenVesaDriver' Guid='$(var.XenVesaDriverGUID)'>
++            <File Id='XenVesaSys' Name='xenvesado.sys' DiskId='1' Source='xenvesado\$(var.build)\xenvesado.sys' KeyPath='yes' />
++            <File Id='XenVesaCat' Name='xenvesado.cat' DiskId='1' Source='xenvesado\$(var.build)\xenvesado.cer' />
++            <File Id='XenVesaInf' Name='xenvesado.inf' DiskId='1' Source='xenvesado\$(var.build)\xenvesado.inf' />
++            <difx:Driver PlugAndPlayPrompt='no' DeleteFiles='no' ForceInstall='no' Sequence='3' Legacy="yes"/>
++        </Component>
++      </Directory>
++
+   </Directory>
+   </Module>
+ </Wix>
